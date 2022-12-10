@@ -1,0 +1,86 @@
+﻿@model MovimientoMesModel
+
+@{ 
+    ViewData["Title"] = Model.MovimientoMesId==0 ? "Alta Movimiento" : "Editar Movimiento";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<h1>@ViewData["Title"]</h1>
+<form method="post" class="form-floating">
+    <div class="container">
+        <div class="row">
+            <input type="hidden" asp-for="MovimientoMesId" />
+            <div class="col-md-4">
+                <label for="NumeroEmpleado" class="form-label">Numero Empleado:</label>
+                <select class="form-control" id="NumEmpleado" asp-items="@ViewBag.empleados" asp-for="NumeroEmpleado">
+                    <option>Seleccione</option>
+                </select>
+            </div>
+            <div class="col-md-8">
+                <label for="Nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="Nombre" asp-for="Nombre" />
+             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="hidden" class="form-control" asp-for="RolId" id="RolId" />
+                <label for="Rol" class="form-label">Rol:</label>
+                <input type="text" class="form-control" id="RolClave" />
+            </div>
+            <div class="col-md-4">
+                <label for="Mes" class="form-label">Mes:</label>
+                <select class="form-control" id="mes" asp-for="Mes">
+                    <option>Seleccione</option>
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="CantidadEntregas" class="form-label">Cantidad Entregas:</label>
+                <input type="number" class="form-control" id="CantidadEntregas" asp-for="CantidadEntregas" />
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="text-center panel-body">
+                <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                <button asp-action="Index" class="btn btn-sm btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $('#NumEmpleado').on('change', function () {
+        //alert($('#NumEmpleado').val());
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("ObtenerEmpleadoId")",
+            data: { id: $('#NumEmpleado').val()},
+            dataType: "json",
+            success: function (msg) {
+                console.log(msg.nombre,msg.rolId,msg.rolClave);
+                $('#Nombre').val(msg.nombre);
+                $('#RolId').val(msg.rolId);
+                $('#RolClave').val(msg.rolClave);
+            },
+            error: function (req, status, error) {
+                alert(error);
+            }
+        });
+    })
+</script>

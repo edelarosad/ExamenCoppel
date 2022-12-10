@@ -1,0 +1,38 @@
+﻿@{ 
+    ViewData["Title"] = "Lista Roles";
+}
+
+<br />
+<div class="text-center">
+    <h1 class="display-4">Lista Roles</h1>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Clave Rol</th>
+                <th>Descripcion</th>
+                <th>
+                    <a asp-action="AltaRol">Crear Rol</a>
+                </th>
+            </tr>
+        </thead>
+        @{ 
+            if(ViewBag.Roles != null)
+            {
+                foreach (var item in ViewBag.Roles)
+                {
+                    <tr>
+                        <td>@item.RolId</td>
+                        <td>@item.RolClave</td>
+                        <td>@item.Descripcion</td>
+                        <td>
+                            <a asp-action="AltaRol" asp-route-id="@item.RolId">Editar</a>
+                            <a asp-action="Eliminar" asp-route-id="@item.RolId">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>

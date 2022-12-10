@@ -1,0 +1,72 @@
+﻿@model EmpleadoModel
+
+@{
+    ViewData["Title"] = Model.EmpleadoId == 0 ? "Alta Empleado" : "Editar Empleado";
+}
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<h1>@ViewData["Title"]</h1>
+<form method="post" class="form-floating">
+    <div class="container">
+        <div class="row">
+            <input type="hidden" asp-for="EmpleadoId" />
+            <div class="col-md-4">
+                <label class="form-label">Numero Empleado:</label>
+                <input type="number" class="form-control" id="NumeroEmpleado" asp-for="NumeroEmpleado" disabled />
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="Nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="Nombre" asp-for="Nombre" />
+            </div>
+            <div class="col-md-4">
+                <label for="ApellidoPaterno" class="form-label">Apellido Paterno:</label>
+                <input type="text" class="form-control" id="ApellidoPaterno" asp-for="ApellidoPaterno" />
+            </div>
+            <div class="col-md-4">
+                <label for="ApellidoMaterno" class="form-label">Apellido Materno:</label>
+                <input type="text" class="form-control" id="ApellidoMaterno" asp-for="ApellidoMaterno" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="Rol" class="form-label">Rol:</label>
+                <select class="form-control" id="Rol" asp-items="@ViewBag.Roles" asp-for="RolId">
+                    <option>Seleccione</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="Email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="Email" asp-for="Email" />
+            </div>
+            <div class="col-md-6">
+                <label for="Telefono" class="form-label">Telefono:</label>
+                <input type="tel" class="form-control" id="Telefono" asp-for="Telefono" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="text-center panel-body">
+                <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                <button asp-action="Index" class="btn btn-sm btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#NumeroEmpleado').val(@ViewBag.Configuracion.Value.Valor1)
+    });
+</script>

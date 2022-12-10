@@ -1,0 +1,30 @@
+﻿@model RolModel
+
+@{ 
+    ViewData["Title"] = "Eliminar Rol";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h3>¿Estas seguro de eliminar el Rol?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RolClave)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RolClave)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </dl>
+
+    <form asp-action="Eliminar">
+        <input type="hidden" asp-for="RolId" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar a Lista Roles</a>
+    </form>
+</div>

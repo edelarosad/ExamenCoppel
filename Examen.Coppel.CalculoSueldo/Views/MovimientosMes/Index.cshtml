@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Lista de Movimientos por Mes";
+}
+
+<br />
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero Empleado</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Mes</th>
+                <th>Cantidad Entregas</th>
+                <th>
+                    <a asp-action="AltaEditarMovimiento">Crear Movimiento</a>
+                </th>
+            </tr>
+        </thead>
+        @{
+            if (ViewBag.Movimientos != null)
+            {
+                foreach (var item in ViewBag.Movimientos)
+                {
+                <tr>
+                    <td>@item.MovimientoMesId</td>
+                    <td>@item.NumeroEmpleado</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Rol</td>
+                    <td>@item.Mes</td>
+                    <td>@item.CantidadEntregas</td>
+                    <td>
+                        <a asp-action="AltaEditarMovimiento" asp-route-id="@item.MovimientoMesId">Editar</a>
+                        <a asp-action="CalcularSueldo" asp-route-id="@item.MovimientoMesId">Calcular Sueldo</a>
+                    </td>
+                </tr>
+                }
+            }
+        }
+    </table>
+</div>

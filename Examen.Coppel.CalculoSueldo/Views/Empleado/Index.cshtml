@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Lista de Empleados";
+}
+
+<br />
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero Empleado</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>
+                    <a asp-action="AltaEmpleado">Crear Empleado</a>
+                </th>
+            </tr>
+        </thead>
+        @{
+            if (ViewBag.Empleados != null)
+            {
+                foreach (var item in ViewBag.Empleados)
+                {
+                    <tr>
+                        <td>@item.EmpleadoId</td>
+                        <td>@item.NumeroEmpleado</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.RolClave</td>
+                        <td>@item.Email</td>
+                        <td>@item.Telefono</td>
+                        <td>
+                            <a asp-action="AltaEmpleado" asp-route-id="@item.EmpleadoId">Editar</a>
+                            <a asp-action="Eliminar" asp-route-id="@item.EmpleadoId">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>
